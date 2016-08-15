@@ -26,6 +26,7 @@ class TelInput extends Component {
         placeholder={this.props.placeholder}
         onChange={this.props.handleInputChange}
         onBlur={this.props.handleOnBlur}
+        data-test="phone-number-input"
       />
     );
   }

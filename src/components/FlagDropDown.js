@@ -86,7 +86,7 @@ class FlagDropDown extends Component {
     }
 
     return (
-      <div className="flag-container">
+      <div data-test="phone-number-flag-dropdown" className="flag-container">
         <div className="selected-flag"
           tabIndex={this.props.allowDropdown ? '0' : ''}
           onClick={this.props.clickSelectedFlag}
