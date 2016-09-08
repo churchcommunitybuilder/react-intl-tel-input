@@ -93,8 +93,7 @@ export default class IntlTelInputApp extends Component {
     this.utilsScriptDeferred = new _.Deferred();
 
     this.isOpening = false;
-    this.isMobile = /Android.+Mobile|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent);
+    this.isMobile = false;
     this.preferredCountries = [];
     this.countries = [];
     this.countryCodes = {};
