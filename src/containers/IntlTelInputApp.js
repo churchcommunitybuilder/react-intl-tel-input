@@ -218,6 +218,10 @@ export default class IntlTelInputApp extends Component {
     document.addEventListener('keydown', this.handleDocumentKeyDown);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.updatePlaceholder(nextProps);
+  }
+
   componentWillUpdate(nextProps, nextState) {
     if (nextState.showDropdown) {
       document.addEventListener('keydown', this.handleDocumentKeyDown);
@@ -761,7 +765,7 @@ export default class IntlTelInputApp extends Component {
       dialCode,
     }, () => {
       // and the input's placeholder
-      this.updatePlaceholder();
+      this.updatePlaceholder(this.props);
 
       // update the active list item
       this.wrapperClass.active = false;
@@ -807,24 +811,25 @@ export default class IntlTelInputApp extends Component {
 
   // update the input placeholder to an
   // example number from the currently selected country
-  updatePlaceholder() {
+  updatePlaceholder(props) {
+    let placeholder = '';
     if (window.intlTelInputUtils && !this.hadInitialPlaceholder &&
-        this.props.autoPlaceholder && this.selectedCountryData) {
+      props.autoPlaceholder && this.selectedCountryData) {
       const numberType = window.intlTelInputUtils.numberType[this.props.numberType];
-      let placeholder = this.selectedCountryData.iso2 ?
+      placeholder = this.selectedCountryData.iso2 ?
         window.intlTelInputUtils.getExampleNumber(this.selectedCountryData.iso2,
           this.nationalMode, numberType) : '';
 
       placeholder = this.beforeSetNumber(placeholder);
 
-      if (typeof this.props.customPlaceholder === 'function') {
-        placeholder = this.props.customPlaceholder(placeholder, this.selectedCountryData);
+      if (typeof props.customPlaceholder === 'function') {
+        placeholder = props.customPlaceholder(placeholder, this.selectedCountryData);
       }
 
-      this.setState({
-        placeholder,
-      });
     }
+    this.setState({
+      placeholder,
+    });
   }
 
   toggleDropdown(status) {
