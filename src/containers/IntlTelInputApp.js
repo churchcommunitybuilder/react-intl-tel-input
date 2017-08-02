@@ -50,6 +50,7 @@ export default class IntlTelInputApp extends Component {
     onPhoneNumberChange: null,
     onSelectFlag: null,
     disabled: false,
+    readonly: false,
   };
 
   static propTypes = {
@@ -76,6 +77,7 @@ export default class IntlTelInputApp extends Component {
     onPhoneNumberChange: PropTypes.func,
     onSelectFlag: PropTypes.func,
     disabled: PropTypes.bool,
+    readonly: PropTypes.bool,
     placeholder: PropTypes.string,
   };
 
@@ -120,8 +122,6 @@ export default class IntlTelInputApp extends Component {
       showDropdown: false,
       highlightedCountry: 0,
       value: '',
-      disabled: false,
-      readonly: false,
       offsetTop: 0,
       outerHeight: 0,
       placeholder: '',
@@ -794,8 +794,8 @@ export default class IntlTelInputApp extends Component {
 
   clickSelectedFlag() {
     if (!this.state.showDropdown &&
-        !this.state.disabled &&
-        !this.state.readonly) {
+        !this.props.disabled &&
+        !this.props.readonly) {
       this.setState({
         showDropdown: true,
         offsetTop: utils.offset(findDOMNode(this.refs.telInput)).top,
@@ -1074,8 +1074,8 @@ export default class IntlTelInputApp extends Component {
           handleInputChange={this.handleInputChange}
           handleOnBlur={this.handleOnBlur}
           className={inputClass}
-          disabled={this.state.disabled}
-          readonly={this.state.readonly}
+          disabled={this.props.disabled}
+          readonly={this.props.readonly}
           fieldName={this.props.fieldName}
           fieldId={this.props.fieldId}
           value={this.state.value}
