@@ -1036,6 +1036,12 @@ export default class IntlTelInputApp extends Component {
     });
   }
 
+  focus() {
+    if (this.refs.telInput) {
+      findDOMNode(this.refs.telInput).focus();
+    }
+  }
+
   render() {
     this.wrapperClass[this.props.css[0]] = true;
     const inputClass = this.props.css[1];
